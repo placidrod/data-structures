@@ -3,20 +3,19 @@ var Queue = function() {
 
   var storage = {};
   var size = 0;
-  var dequeuedKey = 0;
-  var enqueueKey = 1;
+  var enqueueKey = 0;
+  var dequeueKey = 0;
 
   someInstance.enqueue = function(value) {
-    storage[enqueueKey] = value;
     enqueueKey++;
+    storage[enqueueKey] = value;
     size++;
   };
 
   someInstance.dequeue = function() {
-    if(size === 0) dequeuedKey = 0;
-    dequeuedKey++;
-    var dequeued = storage[dequeuedKey];
-    delete storage[dequeued];
+    dequeueKey++;
+    var dequeued = storage[dequeueKey];
+    delete storage[dequeueKey];
     size--;
     return dequeued;
   };
